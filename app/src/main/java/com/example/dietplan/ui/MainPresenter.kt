@@ -1,22 +1,37 @@
 package com.example.dietplan.ui
 
-import com.example.dietplan.data.MockDataProvider
+import com.example.dietplan.data.DataProvider
+import com.example.dietplan.data.DataProviderImpl
 import com.example.dietplan.data.Model.Response
-import com.google.gson.GsonBuilder
 
 class MainPresenter(val view: Contract.ViewContract) : Contract.PresenterContract {
-
-
     override fun getResponse() {
-        val jsonString = MockDataProvider().getMockResponse()
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
+        DataProviderImpl().getList(object : DataProvider.Callback<Response> {
+            override fun onFailure(message: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
-        val parse = gson.fromJson<Response>(jsonString, Response::class.java)
-        view.setDataForView(parse)
+            override fun onSuccess(response: Response?) {
+                view.setDataForView(response!!)
+            }
+
+        })
     }
+
+
+//    override fun getResponse() {
+//        val jsonString = MockDataProvider().getMockResponse()
+//
+//        val gson = GsonBuilder()
+//            .setLenient()
+//            .create()
+//
+//        val parse = gson.fromJson<Response>(jsonString, Response::class.java)
+//        view.setDataForView(parse)
+//    }
+//
+//
 
 
 }

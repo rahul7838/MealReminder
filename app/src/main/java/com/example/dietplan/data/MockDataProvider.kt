@@ -5,6 +5,11 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 
+/*
+    Class to read file from assets.
+    This is unused.
+ */
+
 class MockDataProvider {
 
     private val context = DietPlanApplication.context
